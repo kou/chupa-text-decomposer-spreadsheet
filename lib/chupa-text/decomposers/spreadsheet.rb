@@ -24,10 +24,10 @@ module ChupaText
           text_data = TextData.new(sheet.to_csv)
           text_data["name"] = sheet_name
           text_data["size"] = sheet.to_csv.bytesize
-          text_data["firstRow"] = sheet.first_row
-          text_data["lastRow"] = sheet.last_row
-          text_data["firstColumn"] = sheet.first_column && sheet.first_column_as_letter
-          text_data["lastColumn"] = sheet.last_column && sheet.last_column_as_letter
+          text_data["first-row"] = sheet.first_row
+          text_data["last-row"] = sheet.last_row
+          text_data["first-column"] = sheet.first_column && sheet.first_column_as_letter
+          text_data["last-column"] = sheet.last_column && sheet.last_column_as_letter
           yield text_data
         end
         book.close
