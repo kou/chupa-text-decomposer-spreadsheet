@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version = "1.0.0"
   spec.author = "Kenji Okimoto"
   spec.email = "okimoto@clear-code.com"
-  spec.summary = "ChupaText decomposer for application/vnd.openxmlformats-officedocument.spreadsheetml.sheet."
+  spec.summary = "ChupaText decomposer for spreadsheet."
   spec.description = spec.summary
   spec.license = "MIT"
   spec.files = ["#{spec.name}.gemspec"]
