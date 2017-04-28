@@ -1,4 +1,5 @@
 require "roo"
+require "digest/sha1"
 
 module ChupaText
   module Decomposers
@@ -21,9 +22,11 @@ module ChupaText
         book = Roo::Spreadsheet.open(data.uri)
         book.sheets.each do |sheet_name|
           sheet = book.sheet(sheet_name)
-          text_data = TextData.new(sheet.to_csv)
+          body = sheet.to_csv
+          text_data = TextData.new(body)
           text_data["name"] = sheet_name
-          text_data["size"] = sheet.to_csv.bytesize
+          text_data["digest"] = Digest::SHA1.hexdigest(body)
+          text_data["size"] = body.bytesize
           text_data["first-row"] = sheet.first_row
           text_data["last-row"] = sheet.last_row
           text_data["first-column"] = sheet.first_column && sheet.first_column_as_letter
