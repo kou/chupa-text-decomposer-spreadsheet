@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency("chupa-text")
   spec.add_runtime_dependency("roo")
+  spec.add_runtime_dependency("roo-xls")
 
   spec.add_development_dependency("bundler")
   spec.add_development_dependency("rake")

@@ -1,4 +1,5 @@
 require "roo"
+require "roo-xls"
 require "digest/sha1"
 
 module ChupaText
@@ -23,7 +24,7 @@ module ChupaText
         book.sheets.each do |sheet_name|
           sheet = book.sheet(sheet_name)
           body = sheet.to_csv
-          text_data = TextData.new(body)
+          text_data = TextData.new(body, source_data: data)
           text_data["name"] = sheet_name
           text_data["digest"] = Digest::SHA1.hexdigest(body)
           text_data["size"] = body.bytesize
