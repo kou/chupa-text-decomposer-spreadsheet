@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.files = ["#{spec.name}.gemspec"]
   spec.files += Dir.glob("{README*,LICENSE*,Rakefile,Gemfile}")
+  spec.files += Dir.glob("doc/text/*")
   spec.files += Dir.glob("lib/**/*.rb")
   spec.files += Dir.glob("test/fixture/**/*")
   spec.files += Dir.glob("test/**/*.rb")
