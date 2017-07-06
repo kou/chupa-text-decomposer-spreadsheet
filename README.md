@@ -18,4 +18,9 @@ gem "chupa-text-decomposer-spreadsheet"
 
 and run `bundle install`.
 
+## License
+
+MIT license
+
+Copyright 2017 Kenji Okimoto \<okimoto@clear-code.com\>
 
