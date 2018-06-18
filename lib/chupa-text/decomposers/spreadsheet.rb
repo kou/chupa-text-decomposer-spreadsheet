@@ -20,7 +20,7 @@ module ChupaText
       end
 
       def decompose(data)
-        book = Roo::Spreadsheet.open(data.uri)
+        book = Roo::Spreadsheet.open(data.path.to_s)
         book.sheets.each do |sheet_name|
           sheet = book.sheet(sheet_name)
           body = sheet.to_csv
