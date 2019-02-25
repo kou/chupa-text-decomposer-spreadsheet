@@ -1,5 +1,11 @@
 # News
 
+## 1.0.3: 2019-02-25
+
+### Improvements
+
+  * Added support for target score.
+
 ## 1.0.2: 2018-06-18
 
 ### Improvements
