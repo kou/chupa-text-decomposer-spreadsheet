@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "chupa-text-decomposer-spreadsheet"
-  spec.version = "1.0.2"
+  spec.version = "1.0.3"
   spec.author = "Kenji Okimoto"
   spec.email = "okimoto@clear-code.com"
   spec.summary = "ChupaText decomposer for spreadsheet."
