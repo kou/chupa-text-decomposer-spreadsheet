@@ -16,7 +16,16 @@ module ChupaText
       ]
 
       def target?(data)
-        TARGET_EXTENSIONS.include?(data.extension) || TARGET_MIME_TYPES.include?(data.mime_type)
+        TARGET_EXTENSIONS.include?(data.extension) or
+          TARGET_MIME_TYPES.include?(data.mime_type)
+      end
+
+      def target_score(data)
+        if target?(data)
+          10
+        else
+          nil
+        end
       end
 
       def decompose(data)
