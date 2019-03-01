@@ -5,6 +5,8 @@ require "digest/sha1"
 module ChupaText
   module Decomposers
     class Spreadsheet < Decomposer
+      include Loggable
+
       registry.register("spreadsheet", self)
 
       TARGET_EXTENSIONS = ["ods", "xls", "xlsx", "xlsm", "xml"]
@@ -29,21 +31,47 @@ module ChupaText
       end
 
       def decompose(data)
-        book = Roo::Spreadsheet.open(data.path.to_s)
-        book.sheets.each do |sheet_name|
-          sheet = book.sheet(sheet_name)
-          body = sheet.to_csv
-          text_data = TextData.new(body, source_data: data)
-          text_data["name"] = sheet_name
-          text_data["digest"] = Digest::SHA1.hexdigest(body)
-          text_data["size"] = body.bytesize
-          text_data["first-row"] = sheet.first_row
-          text_data["last-row"] = sheet.last_row
-          text_data["first-column"] = sheet.first_column && sheet.first_column_as_letter
-          text_data["last-column"] = sheet.last_column && sheet.last_column_as_letter
-          yield text_data
+        open_book(data) do |book|
+          book.sheets.each do |sheet_name|
+            sheet = book.sheet(sheet_name)
+            body = sheet.to_csv
+            text_data = TextData.new(body, source_data: data)
+            text_data["name"] = sheet_name
+            text_data["digest"] = Digest::SHA1.hexdigest(body)
+            text_data["size"] = body.bytesize
+            text_data["first-row"] = sheet.first_row
+            text_data["last-row"] = sheet.last_row
+            text_data["first-column"] = sheet.first_column && sheet.first_column_as_letter
+            text_data["last-column"] = sheet.last_column && sheet.last_column_as_letter
+            yield text_data
+          end
         end
-        book.close
+      end
+
+      private
+      def open_book(data)
+        book = nil
+        begin
+          book = Roo::Spreadsheet.open(data.path.to_s)
+        rescue Ole::Storage::FormatError => format_error
+          error do
+            message = "#{log_tag} Invalid format: "
+            message << "#{format_error.class}: #{format_error.message}\n"
+            message << format_error.backtrace.join("\n")
+            message
+          end
+          return
+        end
+
+        begin
+          yield(book)
+        ensure
+          book.close
+        end
+      end
+
+      def log_tag
+        "[decomposer][spreadsheet]"
       end
     end
   end

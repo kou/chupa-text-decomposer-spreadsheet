@@ -45,6 +45,20 @@ class TestSpreadsheet < Test::Unit::TestCase
                    decompose("xls/multi-sheets.xls"))
     end
 
+    def test_xls_broken
+      log = capture_log do
+        assert_equal([], decompose("xls/broken.xls"))
+      end
+      assert_equal([
+                     [
+                       :error,
+                       "[decomposer][spreadsheet] Invalid format: " +
+                       "Ole::Storage::FormatError: OLE2 signature is invalid"
+                     ],
+                   ],
+                   log)
+    end
+
     def test_xlsx
       assert_equal([<<-SHEET1, <<-SHEET2, <<-SHEET3],
 "Sheet1 - A1","Sheet1 - B1"
