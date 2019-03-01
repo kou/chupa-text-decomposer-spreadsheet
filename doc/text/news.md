@@ -1,5 +1,11 @@
 # News
 
+## 1.0.4: 2019-03-01
+
+### Improvements
+
+  * Added error processing for broken file.
+
 ## 1.0.3: 2019-02-25
 
 ### Improvements
