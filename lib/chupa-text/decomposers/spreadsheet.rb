@@ -34,7 +34,7 @@ module ChupaText
         open_book(data) do |book|
           book.sheets.each do |sheet_name|
             sheet = book.sheet(sheet_name)
-            body = sheet.to_csv
+            body = build_body(sheet)
             text_data = TextData.new(body, source_data: data)
             text_data["name"] = sheet_name
             text_data["digest"] = Digest::SHA1.hexdigest(body)
@@ -67,6 +67,38 @@ module ChupaText
           yield(book)
         ensure
           book.close
+        end
+      end
+
+      def build_body(sheet)
+        body = ""
+        first_row = sheet.first_row
+        return body if first_row.nil?
+
+        1.upto(sheet.last_row) do |row|
+          1.upto(sheet.last_column) do |column|
+            body << "\t" if column > 1
+            body << build_cell(sheet, row, column)
+          end
+          body << "\n"
+        end
+
+        body
+      end
+
+      def build_cell(sheet, row, column)
+        return "" if sheet.empty?(row, column)
+
+        cell = sheet.cell(row, column)
+        case sheet.celltype(row, column)
+        when :string
+          cell
+        when :time
+          sheet.integer_to_timestring(cell)
+        when :link
+          cell.url
+        else
+          cell.to_s
         end
       end
 
