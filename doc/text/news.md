@@ -1,5 +1,11 @@
 # News
 
+## 1.0.5: 2019-03-28
+
+### Improvements
+
+  * Simplified extracted text.
+
 ## 1.0.4: 2019-03-01
 
 ### Improvements
