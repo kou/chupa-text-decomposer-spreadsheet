@@ -9,7 +9,7 @@ module ChupaText
 
       registry.register("spreadsheet", self)
 
-      TARGET_EXTENSIONS = ["ods", "xls", "xlsx", "xlsm", "xml"]
+      TARGET_EXTENSIONS = ["ods", "xls", "xlsx", "xlsm"]
 
       TARGET_MIME_TYPES = [
         "application/vnd.oasis.opendocument.spreadsheet",
