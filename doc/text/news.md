@@ -1,5 +1,11 @@
 # News
 
+## 1.0.6: 2019-06-13
+
+### Improvements
+
+  * Removed needless target extension.
+
 ## 1.0.5: 2019-03-28
 
 ### Improvements
