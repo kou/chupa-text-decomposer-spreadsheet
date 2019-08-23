@@ -22,5 +22,4 @@ and run `bundle install`.
 
 MIT license
 
-Copyright 2017 Kenji Okimoto \<okimoto@clear-code.com\>
-
+See [LICENSE.txt](LICENSE.txt) for details.
